@@ -4,7 +4,6 @@ export default Component.extend({
   tagName: '',
   
   didInsertElement: function() {
-    this._super(...arguments);
     let self = this;
     this.set('updateCallback', function() { return self.onUpdate(); } );
   },
@@ -13,6 +12,6 @@ export default Component.extend({
     // Return a hash containing your data.  Character data will be in 'char'.  For example:
     // 
     // return { goals: this.get('char.custom.goals') };
-    return {};
+    return { personality: this.get('char.custom.personality'), advantages: this.get('char.custom.advantages') };
   }
 });
