@@ -13,7 +13,7 @@ export default Controller.extend(AuthenticatedController, {
     session: service(),
     flashMessages: service(),
     gameApi: service(),
-    
+
     resetOnExit: function() {
       this.set('currentPassword', '');
       this.set('newPassword', '');
@@ -24,56 +24,58 @@ export default Controller.extend(AuthenticatedController, {
       this.set('handleName', '');
     },
     actions: {
-        
+
         changePassword() {
-            
-           this.gameApi.requestOne('changePassword', 
+
+           this.gameApi.requestOne('changePassword',
                { name: this.get('model.name'), current_password: this.currentPassword, confirm_password: this.confirmPassword, new_password: this.newPassword}, null)
-            .then((response) => {            
+            .then((response) => {
                 if (response.error) {
                     return;
-                }            
-                this.resetOnExit();    
+                }
+                this.resetOnExit();
                 this.flashMessages.success("Your password has been changed.");
             });
         },
-        
+
         changeSettings() {
-            
-           this.gameApi.requestOne('updateAccountInfo', 
-               { email: this.get('model.email'), 
+
+           this.gameApi.requestOne('updateAccountInfo',
+               { email: this.get('model.email'),
                  name: this.get('model.name'),
                  confirm_password: this.confirmPasswordSettings,
                  timezone: this.get('model.timezone'),
-                 unified_play_screen: this.get('model.unified_play_screen')
+                 unified_play_screen: this.get('model.unified_play_screen'),
+//add in channel_handles option
+                 channel_handles: this.get('model.channel_handles')
                }, null)
-            .then((response) => {            
+            .then((response) => {
                 if (response.error) {
                     return;
-                }            
-                this.resetOnExit();    
+                }
+                this.resetOnExit();
                 this.flashMessages.success("Your account settings have been changed.");
             });
         },
-        
+
         linkHandle() {
-            
-           this.gameApi.requestOne('linkHandle', 
+
+           this.gameApi.requestOne('linkHandle',
                { handle_name: this.handleName, link_code: this.linkCode, confirm_password: this.confirmPasswordHandle }, null)
-            .then((response) => {            
+            .then((response) => {
                 if (response.error) {
                     return;
-                }            
+                }
                 this.set('model.handle', response.handle);
-                this.resetOnExit();    
+                this.resetOnExit();
                 this.flashMessages.success("You have linked this character to your Ares player handle.");
             });
         },
-        
+
         timezoneChanged(val) {
           this.set('model.timezone', val);
         }
-        
-        
+
+
     }
 });

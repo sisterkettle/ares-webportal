@@ -1,0 +1,32 @@
+<span class="channel-who">
+  {{#if this.hideLink}}
+      <CharIconStatusBase @char={{this.char}} @iconClass="small-profile-icon" />
+  {{else}}
+    <LinkTo @route="char" @model={{this.char.name}}>
+        <CharIconStatusBase @char={{this.char}} @iconClass="small-profile-icon" />
+    </LinkTo>
+  {{/if}}
+  <span class="charname">
+    {{#if this.hideLink}}
+      {{#if this.char.nick}}
+        {{this.char.nick}}
+      {{else}}
+        {{this.char.name}}
+      {{/if}}
+    {{else}}
+      <LinkTo @route="char" @model={{this.char.name}}>
+        {{#if this.char.nick}}
+          {{this.char.nick}}
+        {{else}}
+          {{this.char.name}}
+        {{/if}}
+      </LinkTo>
+    {{/if}}
+    {{#if this.char.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
+  </span>
+  {{#if (spaced this.char.ooc_name)}}
+    <span class="charhandle">
+      {{last this.char.ooc_name}}
+    </span>
+  {{/if}}
+</span>
