@@ -1,6 +1,6 @@
 <div id="eshtraits-personality" class="tab-pane fade in">
-    {{markdown-editor text=char.custom.personality}}
+    <MarkdownEditor @text={{this.char.custom.powers}} />
 </div>
 <div id="eshtraits-advantages" class="tab-pane fade in">
-    {{markdown-editor text=char.custom.advantages}}
+    <MarkdownEditor @text={{this.char.custom.skills}} />
 </div>
