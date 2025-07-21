@@ -26,26 +26,20 @@
           <li>Click 'Get A New Link Code' and copy the code it gives you.</li>
           <li>Enter the handle name and the code below and click 'Link to Handle'.</li>
         </ol>
-
+  
           <FlashMessages />
-
+        
           <p><Input @type="text" id="handleName" placeholder="Handle Name" @value={{this.handleName}} /></p>
           <p><Input @type="text" placeholder="Link Code" id="linkCode" @value={{this.linkCode}} /></p>
           <p><Input @type="password" placeholder="Confirm Password" id="confirmPasswordHandle" @value={{this.confirmPasswordHandle}} /></p>
-<<<<<<< HEAD
-
-          <button {{action "linkHandle"}} class="btn btn-primary">Link to Handle</button>
-
-=======
         
           <button {{on 'click' this.linkHandle}} class="btn btn-primary">Link to Handle</button>
         
->>>>>>> upstream/master
         {{/if}}
-
+        
       </div>
   </div>
-
+  
 
 </div>
 
@@ -60,19 +54,13 @@
       <div class="card-body">
 
           <FlashMessages />
-
+        
           <p><Input @type="password" id="password" placeholder="Current Password" @value={{this.currentPassword}} /></p>
           <p><Input @type="password" placeholder="Password" id="newPassword" @value={{this.newPassword}} /></p>
           <p><Input @type="password" placeholder="Confirm New Password"  id="confirmPassword" @value={{this.confirmPassword}} /></p>
-<<<<<<< HEAD
-
-          <button {{action "changePassword"}} class="btn btn-primary">Change Password</button>
-
-=======
         
           <button {{on 'click' this.changePassword}} class="btn btn-primary">Change Password</button>
                 
->>>>>>> upstream/master
       </div>
   </div>
 </div>
@@ -89,24 +77,21 @@
       <div class="card-body">
 
           <FlashMessages />
-
+        
           <div class="card card-default">
             <div class="card-heading">
               Name
             </div>
-
+          
             <div class="card-body">
               {{#if this.isApproved}}
               <p>You are already approved. Submit a <LinkTo @route="jobs">request</LinkTo> to ask for a name change.</p>
               {{else}}
               <p><Input id="name" placeholder="Name" @value={{this.model.name}} /></p>
               {{/if}}
-
+              
             </div>
           </div>
-<<<<<<< HEAD
-
-=======
         
         <div class="card card-default">
           <div class="card-heading">
@@ -119,86 +104,63 @@
           </div>
         </div>
         
->>>>>>> upstream/master
           <div class="card card-default">
             <div class="card-heading">
               Email <LinkTo @route="help-topic" @model="email" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
             </div>
-
+          
             <div class="card-body">
-
+                        
               <p><Input placeholder="Email" id="email" @value={{this.model.email}} /></p>
             </div>
           </div>
-
-
+            
+          
           <div class="card card-default">
               <div class="card-heading">
                 Timezone <LinkTo @route="help-topic" @model="timezone" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
               </div>
-
+    
               <div class="card-body">
-
+          
                 {{#if this.model.handle}}
                 <p>Your timezone is {{this.model.timezone}}. Visit <a href="https://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your timezone, which will apply to all characters linked to your handle.</p>
                 {{else}}
-<<<<<<< HEAD
-
-                <PowerSelect @selected={{this.model.timezone}}  @options={{this.model.timezones}} @searchEnabled=true @onChange={{action "timezoneChanged"}} as |tz|>
-=======
                 
                 <PowerSelect @selected={{this.model.timezone}}  @options={{this.model.timezones}} @searchEnabled=true @onChange={{this.timezoneChanged}} as |tz|>
->>>>>>> upstream/master
                    {{tz}}
                  </PowerSelect>
-
+                                             
                 {{/if}}
               </div>
             </div>
-
-
+            
+            
             <div class="card card-default">
                 <div class="card-heading">
                   Unified Play Screen <LinkTo @route="help-topic" @model="play" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
                 </div>
-
+    
                 <div class="card-body">
-
+          
                   <div class="alert alert-info">
                     Note: This setting applies to all alts on this game.
                   </div>
-
+                  
                   <p>Unified Play Enabled <Input @type="checkbox" @checked={{this.model.unified_play_screen}} /> </p>
 
                 </div>
               </div>
-
-              <div class="card card-default">
-                  <div class="card-heading">
-                    Channel Handles <LinkTo @route="help-topic" @model="channel" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
-                  </div>
-
-                  <div class="card-body">
-
-                    Handles in Channel Chat Enabled <Input @type="checkbox" @checked={{this.model.channel_handles}} />
-
-                  </div>
-                </div>
-
-
-
-
-
+              
+            
+            
+            
+          
           <p><Input @type="password" id="passwordEmail" placeholder="Confirm Password" @value={{this.confirmPasswordSettings}} /></p>
-<<<<<<< HEAD
-          <button {{action "changeSettings"}} class="btn btn-primary">Save Settings</button>
-
-=======
           <button {{on 'click' this.changeSettings}} class="btn btn-primary">Save Settings</button>
              
->>>>>>> upstream/master
           <FlashMessages />
-
+                
       </div>
           
   </div>
