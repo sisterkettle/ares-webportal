@@ -2,20 +2,6 @@
 
 <div class="live-scene-controls">
 
-<<<<<<< HEAD:app/templates/components/live-scene-control.hbs
-<a href="#" {{action "scrollDown"}}><i class="fas fa-angle-double-down"></i></a>
-  {{#if this.scrollPaused}}
-          <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
-          </i></a>
-  {{else}}
-          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i></a>
-  {{/if}}
-  
-  {{#if this.scene.is_watching}}
-  <a href="#" {{action 'watchScene' false}}><i class="fas fa-eye-slash"></i></a>
-  {{else}}
-  <a href="#" {{action 'watchScene' true}}><i class="fas fa-eye"></i></a>
-=======
 <button {{on 'click' this.scrollDown}} class="btn-link"><i class="fas fa-angle-double-down"></i> Jump to End</button>
   {{#if this.scrollPaused}}
           <button {{on 'click' this.unpauseScroll}} class="btn-link"><i class="fas fa-play">
@@ -28,7 +14,6 @@
   <button {{on 'click' (fn this.watchScene false)}} class="btn-link"><i class="fas fa-eye-slash"></i> Unwatch Scene</button>
   {{else}}
   <button {{on 'click' (fn this.watchScene true)}} class="btn-link"><i class="fas fa-eye"></i> Watch Scene</button>
->>>>>>> upstream/master:app/components/live-scene-control.hbs
   {{/if}}
 
 </div>
