@@ -12,6 +12,7 @@ export default Component.extend({
     // Return a hash containing your data.  Character data will be in 'char'.  For example:
     // 
     // return { goals: this.get('char.custom.goals') };
-    return { personality: this.get('char.custom.Personality'), advantages: this.get('char.custom.Advantages') };
+    return { personality: this.get('char.custom.personality'), advantages: this.get('char.custom.advantages') };
   }
 });
+
