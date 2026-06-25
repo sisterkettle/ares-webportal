@@ -2,51 +2,25 @@ import Controller from '@ember/controller';
 import { reads } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { removeObject } from 'ares-webportal/helpers/object-ext';
+import ConfirmAction from 'ares-webportal/mixins/confirm-action';
 
-export default Controller.extend({    
+export default Controller.extend(ConfirmAction, {    
   gameApi: service(),
   flashMessages: service(),
   router: service(),
-  newConfigKey: '',
   configErrors: null,  
-  confirmDelete: false,
-  showConfirmRestore: false,
     
   config: reads('model.config'),
     
   resetOnExit: function() {
-    this.set('newConfigKey', '');
+    this.hideActionConfirmation();
     this.set('configErrors', null);
-    this.set('confirmDelete', null);
-    this.set('showConfirmRestore', false);
   },
     
   @action
-  addNew() {
-    let key = this.newConfigKey;
-    let modelConfig = this.get('model.config');
-    if (modelConfig[key]) {
-      return;
-    }
-    modelConfig[key] = { key: key, lines: 3, value: '', new_value: '' };
-    this.set('model.config', modelConfig);
-  },
-        
-  @action
-  removeKey(key) {
-    console.log(key);
-    let modelConfig = this.get('model.config');
-    console.log(modelConfig);
-    delete modelConfig[key];
-    console.log(modelConfig);
-    this.set('model.config', modelConfig);
-    this.set('confirmDelete', null);  
-  },
-        
-  @action
   restoreDefaults() {
     let api = this.gameApi;
+    this.hideActionConfirmation();
     api.requestOne('restoreConfig', { file: this.get('model.file') }, null)
     .then( (response) => {
       if (response.error) {
@@ -58,15 +32,6 @@ export default Controller.extend({
     });  
   },
   
-  @action
-  setConfirmDelete(value) {
-    this.set('confirmDelete', value);
-  },
-
-  @action
-  setShowConfirmRestore(value) {
-    this.set('showConfirmRestore', value);
-  },
         
   @action
   save() {
