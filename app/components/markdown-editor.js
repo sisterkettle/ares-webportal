@@ -29,7 +29,6 @@ export default Component.extend({
   cookies: service(),
   text: '',
   editor: null,
-  showLinkSelector: false,
   linkText: '',
   linkUrl: '',
   toolbarVisible: true,
@@ -55,7 +54,7 @@ export default Component.extend({
   
   addFormatCodeBracket(beforeCode, afterCode) {
     
-    let edInfo = new MarkdownEditorInfo(this.editor, this.text);  
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);
     var cursorPos;
 
     this.set('text', `${edInfo.beforeCursor}${beforeCode}${edInfo.selection}${afterCode}${edInfo.afterCursor}`);
@@ -64,9 +63,16 @@ export default Component.extend({
       cursorPos = edInfo.cursorEnd + beforeCode.length + afterCode.length;
     }
     else {
-      cursorPos = edInfo.cursorStart + beforeCode.length;     
+      cursorPos = edInfo.cursorStart + beforeCode.length;
     }    
     this.moveCursor(cursorPos);
+  },
+  
+  addStandaloneBlock(edInfo, block, replaceSelection = false, cursorOffset = 0) {
+    let separator = this.text.length > 0 ? "\n\n" : "";
+    let selection = replaceSelection ? "" : edInfo.selection;
+    this.set('text', `${edInfo.beforeCursor}${selection}${separator}${block}${separator}${edInfo.afterCursor}`);
+    this.moveCursor(edInfo.cursorStart + cursorOffset + separator.length);
   },
   
   @action
@@ -114,11 +120,6 @@ export default Component.extend({
   },
   
   @action
-  setShowLinkSelector(value) {
-    this.set('showLinkSelector', value);
-  },
-  
-  @action
   onBold() {
     this.addFormatCodeBracket("**", "**");
   },
@@ -130,44 +131,35 @@ export default Component.extend({
   
   @action
   onHeading() {
-    let edInfo = new MarkdownEditorInfo(this.editor, this.text);  
-    let separator = this.text.length > 0 ? "\n\n" : "";
-    this.set('text', `${edInfo.beforeCursor}${separator}# ${edInfo.selection}${separator}${edInfo.afterCursor}`);
-    this.moveCursor(edInfo.cursorStart + 4);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);
+    this.addStandaloneBlock(edInfo, `## ${edInfo.selection}`, true, 3);
   },
   
   @action
   onOrderedList() {
     let edInfo = new MarkdownEditorInfo(this.editor, this.text);
-    let separator = this.text.length == 0 ? "" : "\n\n";
     let list = edInfo.selection.trim().split("\n").map((line, index) => `${index + 1}. ${line}`).join("\n");
-    this.set('text', `${edInfo.beforeCursor}${separator}${list}${separator}${edInfo.afterCursor}`);
-    this.moveCursor(edInfo.cursorStart + 3 + separator.length);
+    this.addStandaloneBlock(edInfo, list, true, 3);
   },
   
   @action
   onBulletList() {
-    let edInfo = new MarkdownEditorInfo(this.editor, this.text);  
-    let separator = this.text.length == 0 ? "" : "\n\n";
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);
     let list = edInfo.selection.trim().split("\n").map((line) => `* ${line}`).join("\n");
-    this.set('text', `${edInfo.beforeCursor}${separator}${list}${separator}${edInfo.afterCursor}`);
-    this.moveCursor(edInfo.cursorStart + 2 + separator.length);
+    this.addStandaloneBlock(edInfo, list, true, 2);
   },
   
   @action
   onTable() {
-    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
-    let separator = this.text.length > 0 ? "\n\n" : "";
-    this.set('text', `${edInfo.beforeCursor}${edInfo.selection}${separator}|Heading|Heading|\n|----|----|\n|Data|Data|${separator}${edInfo.afterCursor}`);
-    this.moveCursor(edInfo.cursorEnd+1);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text); 
+    let table = "|Heading|Heading|\n|----|----|\n|Data|Data|"   
+    this.addStandaloneBlock(edInfo, table);
   },
   
   @action
   onLine() {
-    let edInfo = new MarkdownEditorInfo(this.editor, this.text);    
-    let separator = this.text.length > 0 ? "\n\n" : "";
-    this.set('text', `${edInfo.beforeCursor}${edInfo.selection}${separator}----${separator}${edInfo.afterCursor}`);
-    this.moveCursor(edInfo.cursorEnd+4+separator.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);
+    this.addStandaloneBlock(edInfo, "----");
   },
   
   @action
@@ -177,16 +169,15 @@ export default Component.extend({
   
   @action
   onCodeBlock() {
-    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
-    let separator = this.text.length > 0 ? "\n\n" : "";
-    let codeblock = "```";
-    this.set('text', `${edInfo.beforeCursor}${separator}${codeblock}\n${edInfo.selection}\n\n${codeblock}${separator}${edInfo.afterCursor}`);
-    this.moveCursor(edInfo.cursorEnd+4+separator.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text)
+    let blockSeparator = "```";
+    let code = `${blockSeparator}\n${edInfo.selection}\n${blockSeparator}`;
+    this.addStandaloneBlock(edInfo, code, true, 4);
   },
   
   @action
   onLink() {
-    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text)
     var linkText = "Link Text";
     var linkUrl = "https://example.com";
     if (edInfo.selection) {
@@ -196,25 +187,20 @@ export default Component.extend({
         linkText = edInfo.selection;
       }
     } 
-    this.set('text', `${edInfo.beforeCursor}[${linkText}](${linkUrl})${edInfo.afterCursor}`);
-    this.setShowLinkSelector(false);
+    this.set('text', `${edInfo.beforeCursor}[${linkText}](${linkUrl})${edInfo.afterCursor} `);
     this.moveCursor(edInfo.cursorStart);
   },
   
   @action
   onImage() {
-    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text)
     let image = "[[image /game/uploads/theme_images/jumbotron.png height=100px width=100px url=http://example.com center]]";
-    this.set('text', `${edInfo.beforeCursor}${edInfo.selection} ${image} ${edInfo.afterCursor}`);
-    this.setShowLinkSelector(false);
-    this.moveCursor(edInfo.cursorStart);
+    this.addStandaloneBlock(edInfo, image);
   },
   
   @action
   onTabs() {
-    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
-    let separator = this.text.length > 0 ? "\n\n" : "";
-    
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);  
     let tabs = "[[tabview]]" +
       "\n[[tab Title1]]" +
       "\nSome text." +
@@ -223,9 +209,7 @@ export default Component.extend({
       "\nSome other text." +
       "\n[[/tab]]" +
       "\n[[/tabview]]";
-    this.set('text', `${edInfo.beforeCursor}${edInfo.selection}${separator}${tabs}${separator}${edInfo.afterCursor}`);
-    this.setShowLinkSelector(false);
-    this.moveCursor(edInfo.cursorStart);
+    this.addStandaloneBlock(edInfo, tabs);
   }
   
 });
