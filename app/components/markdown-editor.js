@@ -4,6 +4,23 @@ import { action, computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import { tracked } from '@glimmer/tracking';
 
+class MarkdownEditorInfo {
+  cursorStart = 0;
+  cursorEnd = 0;
+  selection = '';
+  beforeCursor = '';
+  afterCursor = '';
+
+  constructor(editor, text) {
+    this.cursorStart = editor.selectionStart;
+    this.cursorEnd = editor.selectionEnd;
+    this.selection = text.substring(this.cursorStart, this.cursorEnd) || '';
+    this.beforeCursor = text.substring(0,this.cursorStart);
+    this.afterCursor = text.substring(this.cursorEnd, text.length);
+  }
+};
+
+
 export default Component.extend({
 
   previewText: null,
@@ -17,6 +34,7 @@ export default Component.extend({
   linkUrl: '',
   toolbarVisible: true,
   
+  
   markdownText: computed('text', function() {
     return this.text || "";
   }),
@@ -27,29 +45,26 @@ export default Component.extend({
     
   didInsertElement() {
     this.set('editor', $('#editor-area')[0]);
-    console.log(this.cookies.markdownToolbarVisible());
     this.set('toolbarVisible', this.cookies.markdownToolbarVisible() === "true");
   },
   
   moveCursor(cursorPos) {
     this.editor.focus();
     setTimeout(() => this.editor.selectionEnd = cursorPos, 25);
-  },  
+  },    
   
   addFormatCodeBracket(beforeCode, afterCode) {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end);
-    var cursorPos = start;
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
-    this.set('text', `${before}${beforeCode}${selection}${afterCode}${after}`);
     
-    if (selection.length > 0) {
-      cursorPos = end + beforeCode.length + afterCode.length;
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);  
+    var cursorPos;
+
+    this.set('text', `${edInfo.beforeCursor}${beforeCode}${edInfo.selection}${afterCode}${edInfo.afterCursor}`);
+    
+    if (edInfo.selection.length > 0) {
+      cursorPos = edInfo.cursorEnd + beforeCode.length + afterCode.length;
     }
     else {
-      cursorPos = start + beforeCode.length;     
+      cursorPos = edInfo.cursorStart + beforeCode.length;     
     }    
     this.moveCursor(cursorPos);
   },
@@ -115,64 +130,44 @@ export default Component.extend({
   
   @action
   onHeading() {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end);
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);  
     let separator = this.text.length > 0 ? "\n\n" : "";
-    this.set('text', `${before}${separator}# ${selection}${separator}${after}`);
-    this.moveCursor(start + 4);
+    this.set('text', `${edInfo.beforeCursor}${separator}# ${edInfo.selection}${separator}${edInfo.afterCursor}`);
+    this.moveCursor(edInfo.cursorStart + 4);
   },
   
   @action
   onOrderedList() {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end) || "";
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);
     let separator = this.text.length == 0 ? "" : "\n\n";
-    let list = selection.trim().split("\n").map((line, index) => `${index + 1}. ${line}`).join("\n");
-    this.set('text', `${before}${separator}${list}${separator}${after}`);
-    this.moveCursor(start + 3 + separator.length);
+    let list = edInfo.selection.trim().split("\n").map((line, index) => `${index + 1}. ${line}`).join("\n");
+    this.set('text', `${edInfo.beforeCursor}${separator}${list}${separator}${edInfo.afterCursor}`);
+    this.moveCursor(edInfo.cursorStart + 3 + separator.length);
   },
   
   @action
   onBulletList() {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end) || "";
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);  
     let separator = this.text.length == 0 ? "" : "\n\n";
-    let list = selection.trim().split("\n").map((line) => `* ${line}`).join("\n");
-    this.set('text', `${before}${separator}${list}${separator}${after}`);
-    this.moveCursor(start + 2 + separator.length);
+    let list = edInfo.selection.trim().split("\n").map((line) => `* ${line}`).join("\n");
+    this.set('text', `${edInfo.beforeCursor}${separator}${list}${separator}${edInfo.afterCursor}`);
+    this.moveCursor(edInfo.cursorStart + 2 + separator.length);
   },
   
   @action
   onTable() {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end);
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
     let separator = this.text.length > 0 ? "\n\n" : "";
-    this.set('text', `${before}${selection}${separator}|Heading|Heading|\n|----|----|\n|Data|Data|${separator}${after}`);
-    this.moveCursor(end+1);
+    this.set('text', `${edInfo.beforeCursor}${edInfo.selection}${separator}|Heading|Heading|\n|----|----|\n|Data|Data|${separator}${edInfo.afterCursor}`);
+    this.moveCursor(edInfo.cursorEnd+1);
   },
   
   @action
   onLine() {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end);
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);    
     let separator = this.text.length > 0 ? "\n\n" : "";
-    this.set('text', `${before}${selection}${separator}----${separator}${after}`);
-    this.moveCursor(end+4+separator.length);
+    this.set('text', `${edInfo.beforeCursor}${edInfo.selection}${separator}----${separator}${edInfo.afterCursor}`);
+    this.moveCursor(edInfo.cursorEnd+4+separator.length);
   },
   
   @action
@@ -182,58 +177,42 @@ export default Component.extend({
   
   @action
   onCodeBlock() {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end);
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
     let separator = this.text.length > 0 ? "\n\n" : "";
     let codeblock = "```";
-    this.set('text', `${before}${separator}${codeblock}\n${selection}\n\n${codeblock}${separator}${after}`);
-    this.moveCursor(end+4+separator.length);
+    this.set('text', `${edInfo.beforeCursor}${separator}${codeblock}\n${edInfo.selection}\n\n${codeblock}${separator}${edInfo.afterCursor}`);
+    this.moveCursor(edInfo.cursorEnd+4+separator.length);
   },
   
   @action
   onLink() {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end);
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
     var linkText = "Link Text";
     var linkUrl = "https://example.com";
-    if (selection) {
-      if (selection.startsWith("http") || selection.startsWith("/")) {
-        linkUrl = selection;
+    if (edInfo.selection) {
+      if (edInfo.selection.startsWith("http") || edInfo.selection.startsWith("/")) {
+        linkUrl = edInfo.selection;
       } else {
-        linkText = selection;
+        linkText = edInfo.selection;
       }
     } 
-    this.set('text', `${before}[${linkText}](${linkUrl})${after}`);
+    this.set('text', `${edInfo.beforeCursor}[${linkText}](${linkUrl})${edInfo.afterCursor}`);
     this.setShowLinkSelector(false);
-    this.moveCursor(start);
+    this.moveCursor(edInfo.cursorStart);
   },
   
   @action
   onImage() {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end);
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
     let image = "[[image /game/uploads/theme_images/jumbotron.png height=100px width=100px url=http://example.com center]]";
-    this.set('text', `${before}${selection} ${image} ${after}`);
+    this.set('text', `${edInfo.beforeCursor}${edInfo.selection} ${image} ${edInfo.afterCursor}`);
     this.setShowLinkSelector(false);
-    this.moveCursor(start);
+    this.moveCursor(edInfo.cursorStart);
   },
   
   @action
   onTabs() {
-    let start = this.editor.selectionStart;
-    let end = this.editor.selectionEnd;
-    let selection = this.text.substring(start, end);
-    let before = this.text.substring(0,start);
-    let after = this.text.substring(end,this.text.length);
+    let edInfo = new MarkdownEditorInfo(this.editor, this.text);      
     let separator = this.text.length > 0 ? "\n\n" : "";
     
     let tabs = "[[tabview]]" +
@@ -244,9 +223,9 @@ export default Component.extend({
       "\nSome other text." +
       "\n[[/tab]]" +
       "\n[[/tabview]]";
-    this.set('text', `${before}${selection}${separator}${tabs}${separator}${after}`);
+    this.set('text', `${edInfo.beforeCursor}${edInfo.selection}${separator}${tabs}${separator}${edInfo.afterCursor}`);
     this.setShowLinkSelector(false);
-    this.moveCursor(start);
+    this.moveCursor(edInfo.cursorStart);
   }
   
 });
