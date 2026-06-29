@@ -12,7 +12,7 @@
 {{/if}}
 
 <div class="alert alert-info">
-  <p>The URL for the raw file is: <code><a href="http://localhost:4200/game/uploads/bsg/bsg_galactica_10242.jpg" target="_blank">{{this.model.portal_url}}/game/uploads/{{this.model.path}}</a></code></p>
+  <p>The URL for the raw file is: <code><a href="/game/uploads/{{this.model.path}}" target="_blank">{{this.model.portal_url}}/game/uploads/{{this.model.path}}</a></code></p>
     
   <p>You can use this in markdown on wiki pages, profiles, etc. For example for an image:</p>
   <p><code>[[image /game/uploads/{{this.model.path}}]]</code></p>
