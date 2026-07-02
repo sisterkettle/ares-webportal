@@ -29,6 +29,15 @@
            </div>
          </div>
          
+         <div class="profile-item">
+           <div class="profile-item-name">
+                 Timezone
+           </div>
+           <div class="profile-item-value">
+                 {{this.model.timezone}}
+           </div>
+         </div>
+         
       {{#if this.model.admin_role_title}}
          <div class="profile-item">
            <div class="profile-item-name">
@@ -90,7 +99,10 @@
   
       {{#if this.model.achievements}}
       <div id="systemachievements" class="tab-pane fade">
-          <CharAchievements @achievements={{this.model.achievements}} @sceneStats={{this.model.scene_stats}}/>
+        {{#each-in this.model.achievements as |name achievements|}}
+          <h3>{{name}}</h3>
+          <CharAchievements @achievements={{achievements}} @sceneStats={{this.model.scene_stats}}/>
+        {{/each-in}}
       </div>
       {{/if}}
       
