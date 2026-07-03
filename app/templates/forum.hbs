@@ -10,13 +10,13 @@
 {{#if this.isAuthenticated}}
 
 <div class="action-buttons">
-    <LinkTo @route="search-forum" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Forum</LinkTo>  
+    <LinkTo @route="search-forum" class="btn btn-secondary"><i class="fa-etch fa-solid fa-magnifying-glass" aria-hidden="true"></i> Search Forum</LinkTo>  
 
 
     {{#if this.model.is_muted}}
-      <button {{on 'click' (fn this.muteForum false)}} class="btn btn-secondary"><i class="fa fa-play" aria-hidden="true"></i> Unmute</button>
+      <button {{on 'click' (fn this.muteForum false)}} class="btn btn-secondary"><i class="fa-etch fa-solid fa-play" aria-hidden="true"></i> Unmute</button>
     {{else}}
-      <button {{on 'click' (fn this.muteForum true)}} class="btn btn-secondary"><i class="fa fa-pause" aria-hidden="true"></i> Mute</button>
+      <button {{on 'click' (fn this.muteForum true)}} class="btn btn-secondary"><i class="fa-etch fa-solid fa-pause" aria-hidden="true"></i> Mute</button>
     {{/if}}
       
     <button {{on 'click' this.catchup}} class="btn btn-secondary">Mark All Read</button>
@@ -39,7 +39,7 @@
     <tr>
         <td>
           {{#if forum.unread}}
-          <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+          <span class="badge rounded-pill bg-primary"> <i class="fa-etch fa-solid fa-flag" aria-label="New Activity"></i></span>
           {{/if}}
         </td>
         
@@ -47,7 +47,7 @@
            {{#if forum.can_read}}
            <LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo> 
            {{else}}
-           <i>{{forum.name}} <i class="fa fa-lock" aria-label="Restricted"></i></i>
+           <i>{{forum.name}} <i class="fa-etch fa-solid fa-lock" aria-label="Restricted"></i></i>
            {{/if}}
         </td>
         
@@ -77,7 +77,7 @@
 <h4>Hidden</h4>
 {{#each this.model.hidden as |forum|}}
 <LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo>          
-      <TooltipButton @onClick={{(fn this.hideCategory forum false)}} @position="top" @message="Show category." @icon="fa fa-eye" />
+      <TooltipButton @onClick={{(fn this.hideCategory forum false)}} @position="top" @message="Show category." @icon="fa-etch fa-solid fa-eye" />
      &nbsp; &nbsp;
 {{/each}}
 {{/if}}
