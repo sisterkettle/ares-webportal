@@ -18,14 +18,14 @@
       <div class="play-section-title">Scenes
              
          {{#if this.isApproved}}
-           <TooltipButton @position="right" @message="Join Scene" @icon="fa fa-play-circle" @route="scenes-live" />
+           <TooltipButton @position="right" @message="Join Scene" @icon="fa-etch fa-solid fa-play" @route="scenes-live" />
 
-           <TooltipButton @position="right" @message="Create Scene" @icon="fa fa-plus-circle" @route="scene-create" />
+           <TooltipButton @position="right" @message="Create Scene" @icon="fa-etch fa-solid fa-plus" @route="scene-create" />
 
-           <TooltipButton @position="right" @message="Unshared Scenes" @icon="fa fa-share-square" @route="scenes-unshared" />
+           <TooltipButton @position="right" @message="Unshared Scenes" @icon="fa-etch fa-solid fa-arrow-up-right-from-square" @route="scenes-unshared" />
          {{/if}}
 
-         <TooltipButton @position="right" @message="Who's Online" @icon="fa fa-users" @route="who" />
+         <TooltipButton @position="right" @message="Who's Online" @icon="fa-etch fa-solid fa-users" @route="who" />
 
        </div>  
 
@@ -34,7 +34,7 @@
          <button {{on 'click' (fn this.switchScene scene.id)}} class="btn-link play-selector {{if (eq scene.id this.currentScene.id) 'play-selector-active' ''}}">
                #{{scene.id}} - {{scene.location.name}} 
                {{#if scene.is_unread}}
-                 <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+                 <span class="badge rounded-pill bg-primary"> <i class="fa-etch fa-solid fa-flag" aria-label="New Activity"></i></span>
                {{/if}}
          </button>
          <div class="play-hint">
@@ -47,11 +47,11 @@
        
        
        <div class="play-section-title">Private Messages  
-         <TooltipButton @onClick={{(fn this.setShowNewConversation true)}} @position="right" @message="New Conversation" @icon="fa fa-plus-circle" />
+         <TooltipButton @onClick={{(fn this.setShowNewConversation true)}} @position="right" @message="New Conversation" @icon="fa-etch fa-solid fa-plus" />
         {{#if this.showAllPms}}
-          <TooltipButton @onClick={{(fn this.setShowAllPms false)}} @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
+          <TooltipButton @onClick={{(fn this.setShowAllPms false)}} @position="right" @message="Hide Inactive" @icon="fa-etch fa-solid fa-arrow-up-from-bracket" />
         {{else}}
-          <TooltipButton @onClick={{(fn this.setShowAllPms true)}} @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
+          <TooltipButton @onClick={{(fn this.setShowAllPms true)}} @position="right" @message="Show All" @icon="fa-etch fa-solid fa-arrow-down-from-bracket" />
         {{/if}}
        </div>  
         
@@ -60,7 +60,7 @@
             <button {{on 'click' (fn this.changeChannel channel)}} class="btn-link play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">                  
               # {{channel.title}}
               {{#if channel.is_hidden}}
-                  <i class="fa fa-microphone-slash"></i>
+                  <i class="fa-etch fa-solid fa-microphone-slash"></i>
               {{/if}}
               <span class="badge rounded-pill bg-primary">{{channel.new_messages}}</span>
             </button>
@@ -68,11 +68,11 @@
         {{/each}}        
         
         <div class="play-section-title">Channels
-             <TooltipButton @onClick={{(fn this.setShowAddChannel true)}} @position="right" @message="Add Channel" @icon="fa fa-plus-circle" />
+             <TooltipButton @onClick={{(fn this.setShowAddChannel true)}} @position="right" @message="Add Channel" @icon="fa-etch fa-solid fa-plus" />
             {{#if this.showAllChannels}}
-              <TooltipButton @onClick={{(fn this.setShowAllChannels false)}} @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
+              <TooltipButton @onClick={{(fn this.setShowAllChannels false)}} @position="right" @message="Hide Inactive" @icon="fa-etch fa-solid fa-arrow-up-from-bracket" />
             {{else}}
-              <TooltipButton @onClick={{(fn this.setShowAllChannels true)}} @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
+              <TooltipButton @onClick={{(fn this.setShowAllChannels true)}} @position="right" @message="Show All" @icon="fa fa-arrow-down-from-bracket" />
               {{/if}}
        </div>  
               
@@ -83,7 +83,7 @@
              <button {{on 'click' (fn this.changeChannel channel)}} class="btn-link play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">
                     # {{channel.title}}
                    {{#if channel.muted}}
-                       <i class="fa fa-microphone-slash"></i>
+                       <i class="fa-etch fa-solid fa-microphone-slash"></i>
                    {{/if}}                 
                    <span class="badge rounded-pill bg-primary">{{channel.new_messages}}</span>
                </button>
