@@ -49,9 +49,9 @@
        <div class="play-section-title">Private Messages  
          <TooltipButton @onClick={{(fn this.setShowNewConversation true)}} @position="right" @message="New Conversation" @icon="fa-etch fa-solid fa-plus" />
         {{#if this.showAllPms}}
-          <TooltipButton @onClick={{(fn this.setShowAllPms false)}} @position="right" @message="Hide Inactive" @icon="fa-etch fa-solid fa-arrow-up-from-bracket" />
+          <TooltipButton @onClick={{(fn this.setShowAllPms false)}} @position="right" @message="Hide Inactive" @icon="fa-etch fa-solid fa-angle-up" />
         {{else}}
-          <TooltipButton @onClick={{(fn this.setShowAllPms true)}} @position="right" @message="Show All" @icon="fa-etch fa-solid fa-arrow-down-from-bracket" />
+          <TooltipButton @onClick={{(fn this.setShowAllPms true)}} @position="right" @message="Show All" @icon="fa-etch fa-solid fa-angle-down" />
         {{/if}}
        </div>  
         
@@ -70,9 +70,9 @@
         <div class="play-section-title">Channels
              <TooltipButton @onClick={{(fn this.setShowAddChannel true)}} @position="right" @message="Add Channel" @icon="fa-etch fa-solid fa-plus" />
             {{#if this.showAllChannels}}
-              <TooltipButton @onClick={{(fn this.setShowAllChannels false)}} @position="right" @message="Hide Inactive" @icon="fa-etch fa-solid fa-arrow-up-from-bracket" />
+              <TooltipButton @onClick={{(fn this.setShowAllChannels false)}} @position="right" @message="Hide Inactive" @icon="fa-etch fa-solid fa-angle-up" />
             {{else}}
-              <TooltipButton @onClick={{(fn this.setShowAllChannels true)}} @position="right" @message="Show All" @icon="fa fa-arrow-down-from-bracket" />
+              <TooltipButton @onClick={{(fn this.setShowAllChannels true)}} @position="right" @message="Show All" @icon="fa fa-angle-down" />
               {{/if}}
        </div>  
               
