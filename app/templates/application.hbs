@@ -27,25 +27,25 @@
                        
                        <p>
                            <LinkTo @route="notifications">
-                               <span class="badge rounded-pill bg-primary notification-bell {{if (gt this.model.notification_count 0) 'active' ''}}"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
+                               <span class="badge rounded-pill bg-primary notification-bell {{if (gt this.model.notification_count 0) 'active' ''}}"><i class="fa-etch fa-solid fa-bell" aria-label='Unread Notifications'></i>
                                <span id="notificationBadge">{{this.model.notification_count}}</span>
                                </span>
                            </LinkTo> 
                             |
                            <LinkTo @route="char" @model={{this.currentUser.name}}>
-                             <i class="fa fa-user" aria-label="Profile"></i>
+                             <i class="fa-etch fa-solid fa-user" aria-label="Profile"></i>
                            </LinkTo> |
                            <LinkTo @route="mail">
-                             <i class="fa fa-envelope" aria-label="Mail"></i>
+                             <i class="fa-etch fa-solid fa-envelope" aria-label="Mail"></i>
                            </LinkTo> |
                            <LinkTo @route="jobs">
-                                <i class="fa fa-list" aria-label="Jobs"></i>
+                                <i class="fa-etch fa-solid fa-list" aria-label="Jobs"></i>
                            </LinkTo>
                            | <LinkTo @route="account">
-                             <i class="fa fa-cogs" aria-label="Account"></i>
+                             <i class="fa-etch fa-solid fa-gear" aria-label="Account"></i>
                            </LinkTo>
                            | <LinkTo @route="logout">
-                             <i class="fa fa-sign-out-alt" aria-label="Logout"></i> 
+                             <i class="fa-etch fa-solid fa-arrow-right-from-bracket" aria-label="Logout"></i> 
                            </LinkTo>
                        </p>
                     {{else}}
