@@ -1,13 +1,13 @@
 {{page-title this.model.title}}
 <h1>{{#if this.model.is_pinned}}
-      <i class="fa fa-thumbtack" aria-label="Pinned"></i>
+      <i class="fa-etch fa-solid fa-thumbtack" aria-label="Pinned"></i>
     {{/if}}
     {{this.model.title}}</h1>
 
 <div class="action-buttons-spaced">
   <div>
-    <LinkTo @route="forum-category" @model={{this.model.category.id}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to {{this.model.category.name}}</LinkTo> | 
-    <a href="#bottom"><i class="fas fa-angle-double-down"></i> Jump to End</a>
+    <LinkTo @route="forum-category" @model={{this.model.category.id}}><i class="fa-etch fa-solid fa-arrow-left" aria-hidden="true"></i> Back to {{this.model.category.name}}</LinkTo> | 
+    <a href="#bottom"><i class="fa-etch fa-solid fa-arrow-down-wide-short"></i> Jump to End</a>
   </div>
   
   {{#if this.isAuthenticated}}
@@ -24,20 +24,20 @@
            
            {{#if this.model.can_edit}}
              {{#if (not this.model.editActive)}}
-               <TooltipButton @onClick={{(fn this.setEditActive true)}} @position="left" @message="Edit topic." @icon="fa fa-edit" />
+               <TooltipButton @onClick={{(fn this.setEditActive true)}} @position="left" @message="Edit topic." @icon="fa-etch fa-solid fa-pencil" />
              {{/if}}
            {{/if}}
            {{#if this.model.can_pin}}
              {{#if this.model.is_pinned}}
-               <TooltipButton @onClick={{(fn this.pinPost false)}} @position="left" @message="Unpin topic." @icon="fa fa-thumbtack" />
+               <TooltipButton @onClick={{(fn this.pinPost false)}} @position="left" @message="Unpin topic." @icon="fa-etch fa-solid fa-thumbtack" />
              {{else}}
-               <TooltipButton @onClick={{(fn this.pinPost true)}} @position="left" @message="Pin topic." @icon="fa fa-thumbtack" />
+               <TooltipButton @onClick={{(fn this.pinPost true)}} @position="left" @message="Pin topic." @icon="fa-etch fa-solid fa-thumbtack" />
              {{/if}}
            {{/if}}
            {{#if this.model.can_edit}}
              {{#if (not this.model.editActive)}}
-             <TooltipButton @onClick={{(fn this.setChooseNewCategory true)}} @position="left" @message="Move topic." @icon="fas fa-share-square" />
-             <TooltipButton @onClick={{(fn this.setConfirmDeleteTopic true)}} @position="left" @message="Delete topic." @icon="fa fa-trash" />
+             <TooltipButton @onClick={{(fn this.setChooseNewCategory true)}} @position="left" @message="Move topic." @icon="fa-etch fa-solid fa-arrow-up-right-from-square" />
+             <TooltipButton @onClick={{(fn this.setConfirmDeleteTopic true)}} @position="left" @message="Delete topic." @icon="fa-etch fa-solid fa-trash" />
              {{/if}}
            {{/if}}
            
