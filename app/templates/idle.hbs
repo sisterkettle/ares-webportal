@@ -20,10 +20,10 @@
       </td>
       <td>
         {{#if char.approved}}
-        <TooltipIcon @position="right" @message="Approved." @icon="fas fa-user-shield" />
+        <TooltipIcon @position="right" @message="Approved." @icon="fa-etch fa-solid fa-user-circle" />
         {{/if}}
         {{#if char.warned}}
-        <TooltipIcon @position="right" @message="Warned previously." @icon="fas fa-exclamation-triangle" />
+        <TooltipIcon @position="right" @message="Warned previously." @icon="fa-etch fa-solid fa-exclamation-triangle" />
         {{/if}}
       </td>
       <td>
@@ -41,7 +41,7 @@
      
       </td>
       <td>
-        <TooltipButton @onClick={{(fn this.removeFromIdle char.name)}} @icon="fa fa-trash" @message="Remove" />
+        <TooltipButton @onClick={{(fn this.removeFromIdle char.name)}} @icon="fa-etch fa-solid fa-trash" @message="Remove" />
       </td>
     </tr>
     {{/each}}
