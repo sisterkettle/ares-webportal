@@ -9,7 +9,7 @@
    <Input @type="text" size={{25}} @value={{profile.name}} placeholder="Enter section name." />
    <button class="btn btn-secondary" {{on 'click' (fn this.removeProfile profile.key)}}><i class="fa fa-trash" aria-label="Remove Section"></i></button>
    </p>
-   <MarkdownEditor @text={{profile.text}} />
+   <MarkdownEditor @text={{profile.text}} @rows={{10}} />
     <hr>
    {{/each}}
    

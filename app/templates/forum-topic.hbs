@@ -50,7 +50,7 @@
           <p><b>Title:</b> <Input @type="text" size={{25}} @value={{this.model.title}} /></p>
        
           <p><b>Text:</b></p>
-          <MarkdownEditor @text={{this.model.raw_message}} />
+          <MarkdownEditor @text={{this.model.raw_message}} @rows={{20}} />
                               
             <div class="action-buttons">
               <button class="btn btn-secondary" {{on 'click' (fn this.setEditActive false)}}>Cancel</button>
@@ -94,7 +94,7 @@
        <p><CharIconInline @char={{reply.author}} /></p>
           
        {{#if reply.editActive}}
-          <MarkdownEditor @text={{reply.raw_message}} />
+          <MarkdownEditor @text={{reply.raw_message}} @rows={{20}} />
                               
           <div class="action-buttons">
             <button class="btn btn-secondary" {{on 'click' (fn this.setReplyEditActive reply false)}}>Cancel</button>
@@ -126,7 +126,7 @@
            </div>
          </p>
     
-        <MarkdownEditor @text={{this.reply}} />
+        <MarkdownEditor @text={{this.reply}} @rows={{10}} />
   
           <div class="action-buttons">
             <button {{on 'click' this.addReply}} class="btn btn-primary">Add Reply</button>

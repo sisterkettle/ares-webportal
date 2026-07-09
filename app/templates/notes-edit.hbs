@@ -6,7 +6,7 @@
 {{#each this.model.notes as |section|}}
 
   <h3>{{section.name}} Notes</h3>
-  <MarkdownEditor @text={{section.notes}} />
+  <MarkdownEditor @text={{section.notes}} @rows={{20}} />
   
   
 {{/each}}

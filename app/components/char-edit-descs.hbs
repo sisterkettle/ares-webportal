@@ -9,7 +9,7 @@
    
   <div class="tab-content">     
    <div id="desccurrent" class="tab-pane fade show active">
-     <MarkdownEditor @text={{this.model.char.descs.current}} />
+     <MarkdownEditor @text={{this.model.char.descs.current}} @rows={{10}} />
    </div>
    
    <div id="descshort" class="tab-pane fade show">
@@ -23,7 +23,7 @@
      <Input @type="text" size={{25}} @value={{outfit.name}} placeholder="Enter outfit name." />
      <button class="btn btn-secondary" {{on 'click' (fn this.removeOutfit outfit.key)}}><i class="fa fa-trash" aria-label="Remove Outfit"></i></button>
      </p>
-     <MarkdownEditor @text={{outfit.desc}} />
+     <MarkdownEditor @text={{outfit.desc}} @rows={{10}} />
       <hr>
      {{/each}}
    
@@ -37,7 +37,7 @@
      <Input @type="text" size={{25}} @value={{detail.name}} placeholder="Enter detail name." />
      <button class="btn btn-secondary" {{on 'click' (fn this.removeDetail detail.key)}}><i class="fa fa-trash" aria-label="Remove Detail"></i></button>
      </p>
-     <MarkdownEditor @text={{detail.desc}} />
+     <MarkdownEditor @text={{detail.desc}} @rows={{6}} />
       <hr>
      {{/each}}
    

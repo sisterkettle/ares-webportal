@@ -95,7 +95,7 @@
         </PowerSelectMultiple>
       </p>
       <p><b>Subject:</b> <Input @type="text" size={{25}} id="replySubject" @value={{this.replySubject}} /></p>
-          <MarkdownEditor @text={{this.replyMessage}} />
+          <MarkdownEditor @text={{this.replyMessage}} @rows={{15}} />
 
           <div class="action-buttons">
             <button class="btn btn-primary" {{on 'click' this.sendReply}}>Send</button>    

@@ -35,7 +35,7 @@
   <CharEditDescs @model={{this.model}} />
   
   <div id="hooks" class="tab-pane fade show">
-      <MarkdownEditor @text={{this.model.char.rp_hooks}} />
+      <MarkdownEditor @text={{this.model.char.rp_hooks}} @rows={{10}} />
   </div>
   
   {{#if this.model.char.show_rp_prefs_tab}}
@@ -44,7 +44,7 @@
 
   {{#if this.model.char.show_background_tab}}
   <div id="background" class="tab-pane fade show">
-    <MarkdownEditor @text={{this.model.char.background}} />
+    <MarkdownEditor @text={{this.model.char.background}} @rows={{10}} />
   </div>
   {{/if}}
 

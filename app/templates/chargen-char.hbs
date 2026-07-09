@@ -152,14 +152,14 @@
          <div role="tabpanel" class="tab-pane" id="bg">
              <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.bg_blurb}} /></div>
            
-             <MarkdownEditor @text={{this.model.char.background}} />
+             <MarkdownEditor @text={{this.model.char.background}} @rows={{10}} />
           </div>
           
           <div role="tabpanel" class="tab-pane" id="hooks">
           
                <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.hooks_blurb}} /></div>
 
-               <MarkdownEditor @text={{this.model.char.rp_hooks}} />
+               <MarkdownEditor @text={{this.model.char.rp_hooks}} @rows={{10}} />
           </div>
           
           <div role="tabpanel" class="tab-pane" id="icon">
@@ -176,7 +176,7 @@
              <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.desc_blurb}} /></div>
              
              <div class="chargen-section-title">Main Description</div>
-             <MarkdownEditor @text={{this.model.char.desc}} />
+             <MarkdownEditor @text={{this.model.char.desc}} @rows={{10}} />
              
              <div class="chargen-section-title">Short Description</div>
              <Input @type="text" size={{25}} @value={{this.model.char.shortdesc}} />
@@ -188,7 +188,7 @@
               <div class="chargen-section-title">Last Will</div>
                <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.lastwill_blurb}} /></div>
                <br>
-               <MarkdownEditor @text={{this.model.char.lastwill}} />
+               <MarkdownEditor @text={{this.model.char.lastwill}} @rows={{5}} />
                
                <div class="chargen-section-title">Player Handle</div>
 

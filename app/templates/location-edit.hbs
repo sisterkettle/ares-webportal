@@ -47,7 +47,7 @@
         Description:
     </div>
     <div class="form-item-entry">
-        <MarkdownEditor @text={{this.model.location.descs.current}} />
+        <MarkdownEditor @text={{this.model.location.descs.current}} @rows={{20}} />
     </div> 
   </div>
   
@@ -69,7 +69,7 @@
      <Input @type="text" size={{25}} @value={{detail.name}} placeholder="Enter detail name." />
      <button class="btn btn-secondary" {{on 'click' (fn this.removeDetail detail.key)}}><i class="fa fa-trash" aria-label="Remove Detail"></i></button>
      </p>
-     <MarkdownEditor @text={{detail.desc}} />
+     <MarkdownEditor @text={{detail.desc}} @rows={{5}} />
       <hr>
      {{/each}}
    
