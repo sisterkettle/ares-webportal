@@ -2,9 +2,9 @@
 <label>Pose Order:</label> 
 
 {{#if (eq this.poseOrderType 'normal') }}
-<TooltipIcon @position="left" @message="Regular Order" @icon="fa fa-user" />
+<TooltipIcon @position="left" @message="Regular Order" @icon="fa-etch fa-solid fa-user" />
 {{else}}
-<TooltipIcon @position="left" @message="3-Per Order" @icon="fa fa-users" />
+<TooltipIcon @position="left" @message="3-Per Order" @icon="fa-etch fa-solid fa-users" />
 {{/if}}
 
 {{#each this.poseOrder as |po|}}
