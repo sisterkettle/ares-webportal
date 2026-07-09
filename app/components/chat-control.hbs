@@ -4,15 +4,15 @@
 
 <div class="chat-controls">
 
-  <button class="btn-link" {{on 'click' this.toggleChannelInfo}}><i class="fas fa-info-circle"></i> Channel Info</button>
+  <button class="btn-link" {{on 'click' this.toggleChannelInfo}}><i class="fa-etch fa-solid fa-info-circle"></i> Channel Info</button>
 
-  <button class="btn-link" {{on 'click' this.scrollDown}}><i class="fas fa-angle-double-down"></i> Jump to End</button>
+  <button class="btn-link" {{on 'click' this.scrollDown}}><i class="fa-etch fa-solid fa-arrow-down-wide-short"></i> Jump to End</button>
 
   {{#if this.scrollPaused}}
-          <button class="btn-link" {{on 'click' this.unpauseScroll}}><i class="fas fa-play">
+          <button class="btn-link" {{on 'click' this.unpauseScroll}}><i class="fa-etch fa-solid fa-play">
           </i> Resume Scrolling</button>
   {{else}}
-          <button class="btn-link" {{on 'click' this.pauseScroll}}><i class="fas fa-pause"></i> Pause Scrolling</button>
+          <button class="btn-link" {{on 'click' this.pauseScroll}}><i class="fa-etch fa-solid fa-pause"></i> Pause Scrolling</button>
   {{/if}}
 </div>  
   
@@ -30,7 +30,7 @@
         
       {{#each this.channel.who as |who|}}
         <CharIconInline @char={{who}} />
-        {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
+        {{#if who.muted}}<i class="fa-etch fa-solid fa-microphone-slash"></i>{{/if}}
 
       {{/each}}
       </div>
@@ -56,9 +56,9 @@
          <div class="timestamp-tip">{{message.timestamp}}</div>
          {{#if this.channel.can_manage}}
            {{#if message.flagged}}
-             <TooltipButton @position="left" @onClick={{(fn this.flagMessage message false)}} @icon="fas fa-circle-check" @message="Unflag Message" />
+             <TooltipButton @position="left" @onClick={{(fn this.flagMessage message false)}} @icon="fa-utility-fill fa-semibold fa-circle-check" @message="Unflag Message" />
            {{else}}
-             <TooltipButton @position="left" @onClick={{(fn this.flagMessage message true)}} @icon="fas fa-flag" @message="Flag Message" />
+             <TooltipButton @position="left" @onClick={{(fn this.flagMessage message true)}} @icon="fa-etch fa-solid fa-flag" @message="Flag Message" />
            {{/if}}
          {{/if}}
    </div>
@@ -90,7 +90,7 @@
 
  <div class="scene-controls-box">
  {{#if this.canTalk}}
-   <MarkdownEditor @text={{this.channel.draftMessage}} class="chat-box" cols={{80}} rows="10" @onEnter={{this.sendMessage}} />
+   <MarkdownEditor @text={{this.channel.draftMessage}} class="chat-box" cols={{80}} rows={{6}} @onEnter={{this.sendMessage}} />
  {{/if}}
   <div class="scene-controls">
 
