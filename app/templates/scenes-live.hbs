@@ -3,7 +3,7 @@
 
 <p>This list shows scenes that are currently in progress.  Private scenes require an invitation, but open scenes are open to anyone.   You can play with a MUSH client or through the web portal.</p>
 
-<p>The unread flags <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity Flag"></i></span> show new activity in public scenes or scenes you're watching/participating in.</p>
+<p>The unread flags <span class="badge rounded-pill bg-primary"> <i class="fa-etch fa-solid fa-flag" aria-label="New Activity Flag"></i></span> show new activity in public scenes or scenes you're watching/participating in.</p>
 
 {{#if this.isApproved}}
 <div class="action-buttons">
@@ -18,7 +18,7 @@
   <div class="live-scenes-heading">
     <div class="live-scenes-title">
       {{#if scene.is_unread}}
-      <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+      <span class="badge rounded-pill bg-primary"> <i class="fa-etch fa-solid fa-flag" aria-label="New Activity"></i></span>
       {{/if}}
 
       <LinkTo @route="scene-live" @model={{scene.id}} class="scene-title">
@@ -67,14 +67,14 @@
   <div class="live-scenes-controls">
   
    {{#if scene.watching}}
-     <button class="btn-link" {{on 'click' (fn this.stopWatching scene.id)}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i> Unwatch</button>
+     <button class="btn-link" {{on 'click' (fn this.stopWatching scene.id)}}><i class="fa-etch fa-solid fa-eye-slash" aria-label="Stop Watching"></i> Unwatch</button>
 
    {{else}}
      {{#if scene.can_view}}
-       <button class="btn-link" {{on 'click' (fn this.watchScene scene.id)}}><i class="fa fa-eye" aria-label="Watch"></i> Watch</button>
+       <button class="btn-link" {{on 'click' (fn this.watchScene scene.id)}}><i class="fa-etch fa-solid fa-eye" aria-label="Watch"></i> Watch</button>
   
        {{#if (not scene.participating) }}
-         <button class="btn-link" {{on 'click' (fn this.joinScene scene.id)}}><i class="fa fa-sign-in-alt" aria-label="Join"></i> Join</button>
+         <button class="btn-link" {{on 'click' (fn this.joinScene scene.id)}}><i class="fa-etch fa-solid fa-arrow-right-to-bracket" aria-label="Join"></i> Join</button>
        {{/if}}
      {{/if}}
 
