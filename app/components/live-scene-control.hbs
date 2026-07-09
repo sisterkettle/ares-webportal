@@ -22,21 +22,21 @@
        </div>
     
        <div class="live-scene-controls">
-         <TooltipButton @position="right" @message="Show scene details." @icon="fa fa-info-circle" @onClick={{(fn this.setShowSceneInfo true)}} />
+         <TooltipButton @position="right" @message="Show scene details." @icon="fa-etch fa-solid fa-circle-info" @onClick={{(fn this.setShowSceneInfo true)}} />
      
-         <TooltipButton @position="left" @message="Jump to end." @icon="fa fa-angle-double-down" @onClick={{this.scrollDown}} />
+         <TooltipButton @position="left" @message="Jump to end." @icon="fa-etch fa-solid fa-arrow-down-wide-short" @onClick={{this.scrollDown}} />
      
 
          {{#if this.scrollPaused}}
-           <TooltipButton @position="left" @message="Resume scrolling." @icon="fas fa-play" @onClick={{this.unpauseScroll}} />
+           <TooltipButton @position="left" @message="Resume scrolling." @icon="fa-etch fa-solid fa-play" @onClick={{this.unpauseScroll}} />
          {{else}}
-           <TooltipButton @position="left" @message="Pause scrolling." @icon="fas fa-pause" @onClick={{this.pauseScroll}} />
+           <TooltipButton @position="left" @message="Pause scrolling." @icon="fa-etch fa-solid fa-pause" @onClick={{this.pauseScroll}} />
          {{/if}}
      
          {{#if this.scene.is_watching}}
-           <TooltipButton @position="left" @message="Unwatch scene." @icon="fas fa-eye-slash" @onClick={{(fn this.watchScene false)}} />
+           <TooltipButton @position="left" @message="Unwatch scene." @icon="fa-etch fa-solid fa-eye-slash" @onClick={{(fn this.watchScene false)}} />
          {{else}}
-           <TooltipButton @position="left" @message="Watch scene." @icon="fas fa-eye" @onClick={{(fn this.watchScene true)}} />
+           <TooltipButton @position="left" @message="Watch scene." @icon="fa-etch fa-solid fa-eye" @onClick={{(fn this.watchScene true)}} />
          {{/if}}
        </div>
           
@@ -55,9 +55,9 @@
                 {{#if (not this.scene.reload_required)}}
                   {{#if (and this.isApproved pose.can_edit)}}
                     {{#if (not pose.editActive)}}
-                    <TooltipButton @onClick={{(fn this.editScenePose pose)}} @icon="fas fa-edit" @message="Edit Pose" />
+                    <TooltipButton @onClick={{(fn this.editScenePose pose)}} @icon="fa-utility-fill fa-semibold fa-pen-to-square" @message="Edit Pose" />
                     {{#if pose.can_delete}}
-                    <TooltipButton @onClick={{(fn this.setConfirmDeleteScenePose pose)}} @icon="fas fa-trash" @message="Delete Pose" />
+                    <TooltipButton @onClick={{(fn this.setConfirmDeleteScenePose pose)}} @icon="fa-etch fa-solid fa-trash" @message="Delete Pose" />
                     {{/if}}
                     {{/if}}
                   {{/if}}
@@ -140,7 +140,7 @@
  
             <PoseOrder @poseOrder={{this.scene.pose_order}} @playerName={{this.playerName}} @poseOrderType={{this.scene.pose_order_type}} />
              
-             <MarkdownEditor @text={{this.scene.draftPose}} @rows={{10}} class="scene-pose-box" @onEnter={{(fn this.addPose this.poseType.id)}} />
+             <MarkdownEditor @text={{this.scene.draftPose}} @rows={{6}} class="scene-pose-box" @onEnter={{(fn this.addPose this.poseType.id)}} />
            {{/if}}
    
 
@@ -152,7 +152,7 @@
                  <button {{on 'click' (fn this.addPose this.poseType.id)}} class="btn btn-primary">Add {{this.poseType.title}}</button>
                  <button {{on 'click' (fn this.addPose 'ooc')}} class="btn btn-secondary">Add OOC</button>
                  <button {{on 'click' this.loadLastPose}} class="btn btn-secondary">
-                   <TooltipIcon @position="right" @message="Reload Last" @icon="fa fa-history" />
+                   <TooltipIcon @position="right" @message="Reload Last" @icon="fa-etch fa-solid fa-arrow-rotate-left" />
                  </button>
                  
                  {{#if this.txtExtraInstalled}}
