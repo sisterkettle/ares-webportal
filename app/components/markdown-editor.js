@@ -11,12 +11,12 @@ class MarkdownEditorInfo {
   beforeCursor = '';
   afterCursor = '';
 
-  constructor(editor, text) {
+  constructor(editor, text || "") {
     this.cursorStart = editor.selectionStart;
     this.cursorEnd = editor.selectionEnd;
-    this.selection = (text || "").substring(this.cursorStart, this.cursorEnd) || '';
-    this.beforeCursor = (text || "").substring(0,this.cursorStart);
-    this.afterCursor = (text || "").substring(this.cursorEnd, text.length);
+    this.selection = text.substring(this.cursorStart, this.cursorEnd) || '';
+    this.beforeCursor = text.substring(0,this.cursorStart);
+    this.afterCursor = text.substring(this.cursorEnd, text.length);
   }
 };
 
