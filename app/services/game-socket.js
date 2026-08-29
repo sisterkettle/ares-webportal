@@ -81,9 +81,9 @@ export default Service.extend(AresConfig, {
     
     reconnect() {
       if (this.connectionRetries < 5) {
-        console.log(`Reconnecting websocket (${this.connectionRetries + 1})`);
-        this.sessionStarted(this.charId);
         this.set('connectionRetries', this.connectionRetries + 1);
+        console.log(`Reconnecting websocket (${this.connectionRetries})`);
+        this.sessionStarted(this.charId);
       }
     },
     
